@@ -22,4 +22,8 @@ function handleLikeButton(evt) {
   evt.target.classList.toggle("card__like-button_is-active");
 }
 
-export { createCard, handleLikeButton };
+function deleteCard(event) {
+  event.target.closest(".places__item").remove();
+}
+
+export { createCard, deleteCard, handleLikeButton };

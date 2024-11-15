@@ -8,10 +8,10 @@ export function closeModalWindow(popup) {
   popup.classList.remove("popup_is-opened");
   document.removeEventListener("keydown", closeEscModal);
   popup.removeEventListener("mousedown", handleCloseByOverlayClick);
-  popup.addEventListener("transitionend", function handleTransitionEnd() {
+  popup.addEventListener("animationstart", function handleTransitionEnd() {
     popup.classList.remove(".popup_is-opened");
     popup.style.display = "";
-    popup.removeEventListener("transitionend", handleTransitionEnd);
+    popup.removeEventListener("animationend", handleTransitionEnd);
   });
 }
 

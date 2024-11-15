@@ -1,13 +1,9 @@
 import "./pages/index.css";
-import { createCard, handleLikeButton } from "./scripts/card.js";
+import { createCard, deleteCard, handleLikeButton } from "./scripts/card.js";
 import { initialCards } from "./scripts/cards.js";
 import { openModalWindow, closeModalWindow } from "./scripts/modal.js";
 
 const cardsContainer = document.querySelector(".places__list");
-
-function deleteCard(event) {
-  event.target.closest(".places__item").remove();
-}
 
 initialCards.forEach(function (elem) {
   const createdCard = createCard(
@@ -59,8 +55,8 @@ function handleOpenProfilePopup() {
   openModalWindow(editPopup);
 }
 
-const formProfilElement = editPopup.querySelector(".popup__form");
-formProfilElement.addEventListener("submit", handleProfilFormSubmit);
+const formProfileElement = editPopup.querySelector(".popup__form");
+formProfileElement.addEventListener("submit", handleProfilFormSubmit);
 
 function handleProfilFormSubmit(evt) {
   evt.preventDefault();
