@@ -1,16 +1,16 @@
 export function openModalWindow(popup) {
   popup.classList.add("popup_is-opened");
-  document.addEventListener("keydown", closeEscModal);
+  document.addEventListener("keydown", handleCloseByEsc);
   popup.addEventListener("mousedown", handleCloseByOverlayClick);
 }
 
 export function closeModalWindow(popup) {
   popup.classList.remove("popup_is-opened");
-  document.removeEventListener("keydown", closeEscModal);
+  document.removeEventListener("keydown", handleCloseByEsc);
   popup.removeEventListener("mousedown", handleCloseByOverlayClick);
 }
 
-function closeEscModal(evt) {
+function handleCloseByEsc(evt) {
   if (evt.key === "Escape") {
     const popup = document.querySelector(".popup_is-opened");
     closeModalWindow(popup);
