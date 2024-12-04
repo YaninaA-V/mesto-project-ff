@@ -8,6 +8,7 @@ function createCard(cardData, openImagePopup, handleLikeButton, myID) {
   const cardTitle = cardElement.querySelector(".card__title");
   const likeButton = cardElement.querySelector(".card__like-button");
   const likesCountElement = cardElement.querySelector(".card__likes-count");
+  const deleteButton = cardElement.querySelector(".card__delete-button");
 
   const likesArray = Array.isArray(cardData.likes) ? cardData.likes : [];
   likesCountElement.textContent = likesArray.length; 
@@ -25,18 +26,9 @@ function createCard(cardData, openImagePopup, handleLikeButton, myID) {
 
   likeButton.addEventListener("click", () => handleLikeButton(cardData, likeButton, likesCountElement));
 
-  const deleteButton = cardElement.querySelector(".card__delete-button");
   if(cardData.owner._id === myID) {
     deleteButton.style.display = "block";
-    deleteButton.addEventListener("click", () => {
-      deleteCard(cardData._id)
-      .then(() => {
-        cardElement.remove();
-      })
-      .catch((error) => {
-        console.error("Ошибка при удалении карточки:", error);
-      });
-  });
+    deleteButton.addEventListener("click", () => handleDeleteCard(cardData, cardElement));
   } else {
     deleteButton.style.display = "none";
   }  
@@ -63,6 +55,16 @@ function handleLikeButton(cardData, likeButton, likesCountElement) {
       console.error("Произошла ошибка при добавлении лайка", error);
     });
   }
+}
+
+function handleDeleteCard(cardData, cardElement) {
+  deleteCard(cardData._id)
+      .then(() => {
+        cardElement.remove();
+      })
+      .catch((error) => {
+        console.error("Ошибка при удалении карточки:", error);
+      });
 }
 
 export { createCard, handleLikeButton }

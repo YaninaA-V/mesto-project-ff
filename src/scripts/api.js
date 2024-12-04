@@ -6,11 +6,18 @@ const config = {
     }
   }
 
+  function checkResult(res) {
+    if (res.ok) {
+      return res.json();
+  }
+  return Promise.reject(`Ошибка: ${res.status}`);
+}
+
   export const getUserInfo = () => {
     return fetch(`${config.baseUrl}/users/me`, {
       method: "GET",
       headers: config.headers
-    }).then(res => res.json());
+    }).then(checkResult);
     
   }
   export const patchUserInfoChange = (name, about) => {
@@ -21,7 +28,7 @@ const config = {
         name: name,
         about: about
       })
-    }).then(res => res.json());
+    }).then(checkResult);
   }
 
   export const getInitialCards = () => {
@@ -29,12 +36,7 @@ const config = {
       method: "GET",
       headers: config.headers
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+      .then(checkResult);
   } 
 
   export const postNewCard = (name, link) => {
@@ -45,43 +47,28 @@ const config = {
         name: name,
         link: link
       })
-    }).then(res => res.json());
+    }).then(checkResult);
   }
 
   export const deleteCard = (cardId) => {
     return fetch(`${config.baseUrl}/cards/${cardId} `,{
       method: "DELETE",
       headers: config.headers
-    }).then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    }).then(checkResult);
   }
   
   export const putMyLike = (cardId) => {
     return fetch(`${config.baseUrl}/cards/likes/${cardId} `,{      
       method: "PUT",
       headers: config.headers
-    }).then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    }).then(checkResult);
   }
 
   export const deleteMyLike = (cardId) => {
     return fetch(`${config.baseUrl}/cards/likes/${cardId} `,{      
       method: "DELETE",
       headers: config.headers
-    }).then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    }).then(checkResult);
   }
   
   export const patchUserAvatarChange = (link) => {
@@ -91,7 +78,7 @@ const config = {
       body: JSON.stringify({
         avatar: link
       })
-    }).then(res => res.json());
+    }).then(checkResult);
   }
 
   

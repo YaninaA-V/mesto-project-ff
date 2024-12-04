@@ -101,7 +101,7 @@ function handleAddCardFormSubmit(evt) {
   postNewCard(imgName.value, imgLink.value)
    .then(newCard => {
     const newCardImg = createCard(
-    { name: newCard.name, link: newCard.link, owner: newCard.owner, _id: newCard._id },
+    newCard,
     openImagePopup,
     handleLikeButton,
     myID    
