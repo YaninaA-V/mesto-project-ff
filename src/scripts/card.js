@@ -1,6 +1,6 @@
 import { deleteCard, putMyLike, deleteMyLike } from "./api";
 
-function createCard(cardData, openImagePopup, handleLikeButton, myID) {
+function createCard(cardData, openImagePopup, handleLikeButton, handleDeleteCard, myID) {
   const cardTemlate = document.querySelector("#card-template").content;
   const cardElement = cardTemlate.querySelector(".places__item").cloneNode(true);
 
@@ -67,4 +67,4 @@ function handleDeleteCard(cardData, cardElement) {
       });
 }
 
-export { createCard, handleLikeButton }
+export { createCard, handleLikeButton, handleDeleteCard }

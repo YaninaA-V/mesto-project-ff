@@ -1,7 +1,8 @@
 import "./pages/index.css";
 import { 
   createCard, 
-  handleLikeButton 
+  handleLikeButton,
+  handleDeleteCard
 } from "./scripts/card.js";
 import { 
   openModalWindow, 
@@ -104,6 +105,7 @@ function handleAddCardFormSubmit(evt) {
     newCard,
     openImagePopup,
     handleLikeButton,
+    handleDeleteCard,
     myID    
   );
 
@@ -145,6 +147,7 @@ Promise.all([getUserInfo(), getInitialCards()]).then(([userData, result]) => {
     const createdCard = createCard(card,
       openImagePopup,
       handleLikeButton,
+      handleDeleteCard,
       myID
     );
     cardsContainer.append(createdCard);
